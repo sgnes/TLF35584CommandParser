@@ -1,0 +1,30 @@
+# https://travis-ci.org/sgnes/TLF35584CommandParser
+language: python
+sudo: required
+python
+    - 3.3
+    - 3.4
+    - 3.5
+
+
+os:
+  - linux
+  - macos
+
+notifications:
+  email: false
+
+install:
+  - pip install -r requirements.txt
+  - travis_retry pip install pylint codeclimate-test-reporter
+  - travis_retry pip install pytest-cov coverage coveralls codacy-coverage
+
+script:
+#  python -m unittest discover ./pyccp/tests/
+   coverage run test.py
+
+after_success:
+  - coveralls
+  - coverage xml && python-codacy-coverage -r coverage.xml
+  - codeclimate-test-reporter
+
