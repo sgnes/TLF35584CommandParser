@@ -17,7 +17,7 @@ def CmdToHex(cmd, addr, value):
     return packed.hex()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':    # pragma: no cover
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('--action', type=str, default="CmdToHex" ,help='CmdToHex or HexToCmd', required=True)
     parser.add_argument('--cmd', type=int, help='read or write, 1 for write, 0 for read', required=False)
