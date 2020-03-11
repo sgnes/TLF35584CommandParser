@@ -1,15 +1,12 @@
 # https://travis-ci.org/sgnes/TLF35584CommandParser
 language: python
 sudo: required
-python
-    - 3.3
-    - 3.4
-    - 3.5
+python:
+    - 3.8
 
 
 os:
   - linux
-  - macos
 
 notifications:
   email: false

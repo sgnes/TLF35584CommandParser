@@ -1,6 +1,6 @@
-import click
 import bitstruct
 import argparse
+import sys
 
 def HexToCmd(hex):
     """convert the raw tlf35584 command to physical meaning."""
@@ -19,14 +19,16 @@ def CmdToHex(cmd, addr, value):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--action', help='CmdToHex or HexToCmd', required=True)
-    parser.add_argument('--cmd', help='read or write, 1 for write, 0 for read', required=False)
+    parser.add_argument('--action', type=str, default="CmdToHex" ,help='CmdToHex or HexToCmd', required=True)
+    parser.add_argument('--cmd', type=int, help='read or write, 1 for write, 0 for read', required=False)
     parser.add_argument('--hex', help='the raw hex command', required=False)
-    parser.add_argument('--addr', help='the register address to be read or write', required=False)
-    parser.add_argument('--value', help='the register value to be write, only used for write command', required=False)
-    if argparse.action == "CmdToHex":
-        CmdToHex(argparse.cmd, argparse.addr, argparse.value)
-    elif argparse.action == "HexToCmd":
-        HexToCmd(argparse.hex)
+    parser.add_argument('--addr', type=int, help='the register address to be read or write', required=False)
+    parser.add_argument('--value', type=int, help='the register value to be write, only used for write command', required=False)
+
+    args = parser.parse_args(sys.argv[1:])
+    if args.action == "CmdToHex":
+        CmdToHex(args.cmd, args.addr, args.value)
+    elif args.action == "HexToCmd":
+        HexToCmd(args.hex)
     else:
         raise AttributeError
